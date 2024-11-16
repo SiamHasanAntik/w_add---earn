@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transactions</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    /* Filter Section */
+    .filter-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .filter-container label {
+      font-weight: bold;
+    }
+
+    .filter-container input[type="text"],
+    .filter-container select {
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      outline: none;
+      width: 150px;
+    }
+
+    .filter-container button {
+      background-color: #8e24aa;
+      color: #fff;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .filter-container button:hover {
+      background-color: #6a1b9a;
+    }
+
+    /* Table Styles */
+    .table-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    thead {
+      background-color: #f4e3f7;
+    }
+
+    th, td {
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      font-weight: bold;
+      color: #8e24aa;
+    }
+
+    td {
+      color: #666;
+    }
+
+    .no-data {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>Transactions</h1>
+
+  <!-- Filter Section -->
+  <div class="filter-container">
+    <div>
+      <label for="transaction-number">Transaction Number</label>
+      <input type="text" id="transaction-number" placeholder="Enter number">
+    </div>
+
+    <div>
+      <label for="type">Type</label>
+      <select id="type">
+        <option value="all">All</option>
+        <!-- Add other options here if needed -->
+      </select>
+    </div>
+
+    <div>
+      <label for="remark">Remark</label>
+      <select id="remark">
+        <option value="any">Any</option>
+        <!-- Add other options here if needed -->
+      </select>
+    </div>
+
+    <button type="button">
+      <span>🔍</span> Filter
+    </button>
+  </div>
+
+  <!-- Table Section -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Trx</th>
+          <th>Transacted</th>
+          <th>Amount</th>
+          <th>Post Balance</th>
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="5" class="no-data">Data not found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

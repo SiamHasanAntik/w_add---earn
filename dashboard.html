@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Dashboard</title>
+    <style>
+
+
+
+
+
+   
+
+    
+   
+
+
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2f80eb;
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+
+        .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #0890ff;
+      color: #fff;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .navbar .nav-list {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar .nav-list li {
+      margin: 0 15px;
+      position: relative;
+    }
+
+    .navbar .nav-list a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .profile img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+    }
+
+    .dropdown .dropdown-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #444;
+      list-style: none;
+      margin: 0;
+      padding: 10px 0;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .dropdown-menu li {
+      margin: 0;
+      padding: 5px 20px;
+    }
+
+    .dropdown-menu li a {
+      color: #fff;
+    }
+
+    .dropdown-menu li:hover {
+      background-color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .navbar .nav-list {
+        flex-direction: column;
+      }
+
+      .navbar .nav-list li {
+        margin: 10px 0;
+      }
+    }
+
+
+
+
+    
+        /* Main Content */
+        .container {
+            padding: 20px;
+            
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+           
+           
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #E91E63;
+            margin: 10px 0;
+        }
+        /* Grid Menu */
+        .grid-menu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            text-align: center;
+        }
+        .grid-item {
+            
+            background-color: rgb(9, 117, 219);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+        }
+        .grid-item img {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 5px;
+        }
+        /* Statement Section */
+        .statement {
+            background-color: rgb(64, 141, 241);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .statement div {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            color: #4CAF50;
+            padding: 8px 0;
+            border-bottom: 1px solid #f2f2f2;
+        }
+        .statement div:last-child {
+            border-bottom: none;
+        }
+
+        /* Modal for Deposit Packages */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        .modal-content {
+            background-color: #1897ff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+        }
+        .close-btn {
+            color: #aaa;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: right;
+        }
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .package {
+            background-color: gold;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .package-title {
+            font-weight: bold;
+            color: #333;
+        }
+        .package-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+        .buy-button {
+            background-color: #4CAF50;
+            color: #1897ff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .price {
+            font-size: 20px;
+            color: #E91E63;
+            margin-bottom: 20px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        .details {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .grid-menu {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .package-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .grid-menu {
+                grid-template-columns: 1fr;
+            }
+            .balance {
+                font-size: 12px;
+                padding: 3px 8px;
+            }
+            .header h1 {
+                font-size: 18px;
+            }
+            .grid-item {
+                font-size: 13px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+ 
+
+
+    <header class="header">
+        <div class="logo">
+          <img src="logo.png" alt="Logo">
+        </div>
+        <!-- <nav class="navbar">
+          <ul class="nav-list">
+            
+            <li class="dropdown">
+              <button class="dropdown-btn">Options ▼</button>
+              <ul class="dropdown-menu">
+                <li><a href="#">Option 1</a></li>
+                <li><a href="#">Option 2</a></li>
+                <li><a href="#">Option 3</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav> -->
+        <div class="profile">
+          <img src="profile.jpg" alt="Profile">
+        </div>
+      </header>
+      <script>
+        // JavaScript
+        document.addEventListener('DOMContentLoaded', () => {
+          const dropdownBtn = document.querySelector('.dropdown-btn');
+          const dropdownMenu = document.querySelector('.dropdown-menu');
+    
+          dropdownBtn.addEventListener('click', () => {
+            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+          });
+    
+          document.addEventListener('click', (e) => {
+            if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+              dropdownMenu.style.display = 'none';
+            }
+          });
+        });
+      </script>
+
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- My Top10i Section -->
+        <div class="section-title">My Top10i</div>
+        <div class="grid-menu">
+            <div class="grid-item">
+                <img src="images/youtube.png" alt="Help Line">
+                <a href="videos.html"><div>video</div></a>
+            </div>
+           <a href="mywork.html"> <div class="grid-item">
+                <img src="images/laptop-work.png" alt="My Work">
+                <div>My Work</div>
+            </div>
+        </a>
+            <div class="grid-item">
+                <img src="images/money-deposit.png" alt="Deposit">
+               <a href="silver-package.html"> <div>Deposit</div></a>
+            </div>
+
+            
+            <div class="grid-item">
+                <a href="withdrow.html"><img src="images/trade-love-for-money.png" alt="Withdraw">
+                <div>Withdraw</div>
+                </a>
+           
+            </div>
+            <div class="grid-item" onclick="openModal()">
+                <img src="images/jar-with-label.png" alt="Deposit">
+                <div>Package</div>
+            </div>
+            <a href="user_profile.html">
+            <div class="grid-item">
+                <img src="images/director.png" alt="Profile">
+                <div>Profile</div>
+            </div>
+        </a>
+            <div class="grid-item">
+                <img src="images/information-exchange.png" alt="Refer">
+                <div>Refer</div>
+            </div>
+            <div class="grid-item">
+                <img src="images/deal.png" alt="Transaction">
+                <a href="transection.html"><div>Transaction</div> </a>
+            </div>
+            <div class="grid-item">
+                <img src="images/concierge-desk.png" alt="Help Line">
+                <div>Help Line</div>
+            </div>
+            
+            <div class="grid-item">
+                <img src="images/game-controller.png" alt="Help Line">
+                <a href="games.html"> <div>Games</div></a>
+            </div>
+        </div>
+
+        <!-- Statement Section -->
+        <div class="section-title">Statement</div>
+        <div class="statement">
+            <div>
+                <span>Deposit History</span>
+                <img src="deposit-history-icon.png" alt="Deposit History">
+            </div>
+            <div>
+                <span>Withdraw History</span>
+                <img src="withdraw-history-icon.png" alt="Withdraw History">
+            </div>
+        </div>
+
+    </div>
+
+<!-- Modal for Deposit Packages -->
+<div id="depositModal" class="modal">
+    <div class="modal-content">
+        <div class="close-btn" onclick="closeModal()">&times;</div>
+        <h2>Deposit Packages</h2>
+        <div class="package-grid">
+            <div class="package">
+                <!-- <div class="package-title">Silver </div>
+                <div class="package-price">500.00 ৳</div> -->
+                <div class="title">Silver Package</div> 
+                <div class="price">500.00 ৳</div> 
+                <p>Daily Ads: 3</p>  <!-- Customize details as needed -->
+                    <p>Daily Income: 300 ৳</p>
+                    <p>Validity: 200 Days</p>
+                <!-- Buy Button with link to new page for Silver package -->
+                <button class="buy-button" onclick="openBuyPage('silver-package.html')">Buy</button>
+            </div>
+
+            <div class="container" color="Red">
+                <div class="title">Silver Package</div> 
+                <div class="price">500.00 ৳</div> 
+                <div class="details">
+                    <p>Daily Ads: 3</p>  <!-- Customize details as needed -->
+                    <p>Daily Income: 300 ৳</p>
+                    <p>Validity: 200 Days</p>
+                </div>
+                <button class="buy-button" onclick="openBuyPage('silver-package.html')">Buy</button>
+            </div>  
+
+
+            <div class="container">
+                <div class="title">Silver Package</div> <!-- Change title for each package -->
+                <div class="price">500.00 ৳</div> <!-- Change price for each package -->
+                <div class="details">
+                    <p>Daily Ads: 3</p>  <!-- Customize details as needed -->
+                    <p>Daily Income: 300 ৳</p>
+                    <p>Validity: 200 Days</p>
+                </div>
+                <button class="buy-button" onclick="openBuyPage('silver-package.html')">Buy</button>
+            </div>
+ 
+            <div class="container">
+                <div class="title">Silver Package</div> 
+                <div class="price">500.00 ৳</div> <!-- Change price for each package -->
+                <div class="details">
+                    <p>Daily Ads: 3</p>  <!-- Customize details as needed -->
+                    <p>Daily Income: 300 ৳</p>
+                    <p>Validity: 200 Days</p>
+                </div>
+                <!-- Buy Button with link to new page for Gold package -->
+                <button class="buy-button" onclick="openBuyPage('gold-package.html')">Buy</button>
+            </div>
+            <!-- Additional packages as needed -->
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal() {
+        document.getElementById("depositModal").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("depositModal").style.display = "none";
+    }
+
+    function openBuyPage(pageUrl) {
+        // Redirect to the specified page
+        window.location.href = pageUrl;
+    }
+</script>
+
+</body>
+</html>

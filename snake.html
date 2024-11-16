@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 1px solid #000;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game settings
+        const gridSize = 20;
+        let snake = [{ x: gridSize * 5, y: gridSize * 5 }];
+        let direction = 'right';
+        let food = { x: Math.floor(Math.random() * 20) * gridSize, y: Math.floor(Math.random() * 20) * gridSize };
+        let score = 0;
+        let gameInterval;
+
+        document.addEventListener('keydown', changeDirection);
+
+        function changeDirection(event) {
+            const keyPressed = event.key;
+            if (keyPressed === 'ArrowUp' && direction !== 'down') {
+                direction = 'up';
+            } else if (keyPressed === 'ArrowDown' && direction !== 'up') {
+                direction = 'down';
+            } else if (keyPressed === 'ArrowLeft' && direction !== 'right') {
+                direction = 'left';
+            } else if (keyPressed === 'ArrowRight' && direction !== 'left') {
+                direction = 'right';
+            }
+        }
+
+        function moveSnake() {
+            const head = { ...snake[0] };
+            if (direction === 'up') head.y -= gridSize;
+            if (direction === 'down') head.y += gridSize;
+            if (direction === 'left') head.x -= gridSize;
+            if (direction === 'right') head.x += gridSize;
+
+            // Add the new head
+            snake.unshift(head);
+
+            // Check if snake eats food
+            if (head.x === food.x && head.y === food.y) {
+                score++;
+                food = { x: Math.floor(Math.random() * 20) * gridSize, y: Math.floor(Math.random() * 20) * gridSize };
+            } else {
+                // Remove the last part of the snake
+                snake.pop();
+            }
+
+            // Check collision with walls
+            if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
+                endGame();
+            }
+
+            // Check collision with itself
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    endGame();
+                }
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw snake
+            ctx.fillStyle = 'green';
+            snake.forEach(segment => {
+                ctx.fillRect(segment.x, segment.y, gridSize, gridSize);
+            });
+
+            // Draw food
+            ctx.fillStyle = 'red';
+            ctx.fillRect(food.x, food.y, gridSize, gridSize);
+
+            // Display score
+            ctx.fillStyle = 'black';
+            ctx.font = '20px Arial';
+            ctx.fillText(`Score: ${score}`, 10, 20);
+        }
+
+        function gameLoop() {
+            moveSnake();
+            draw();
+        }
+
+        function startGame() {
+            gameInterval = setInterval(gameLoop, 100);
+        }
+
+        function endGame() {
+            clearInterval(gameInterval);
+            alert(`Game over! Your score: ${score}`);
+            resetGame();
+        }
+
+        function resetGame() {
+            snake = [{ x: gridSize * 5, y: gridSize * 5 }];
+            direction = 'right';
+            food = { x: Math.floor(Math.random() * 20) * gridSize, y: Math.floor(Math.random() * 20) * gridSize };
+            score = 0;
+            startGame();
+        }
+
+        startGame();
+    </script>
+</body>
+</html>

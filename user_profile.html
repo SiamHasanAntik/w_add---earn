@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .profile-container {
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            text-align: center;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .user-name,
+        .user-email {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .profile-bio,
+        .profile-details {
+            margin-top: 20px;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: #333;
+            border-bottom: 2px solid #f1f1f1;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        ul li strong {
+            color: #333;
+        }
+
+        .edit-profile-btn,
+        .save-profile-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .edit-profile-btn:hover,
+        .save-profile-btn:hover {
+            background-color: #45a049;
+        }
+
+        .profile-form input,
+        .profile-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .profile-form textarea {
+            resize: vertical;
+        }
+
+        .profile-form {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="profile-pic.jpg" alt="Profile Picture" class="profile-pic">
+            <h1 class="user-name" id="user-name">Siam Hasan</h1>
+            <p class="user-email" id="user-email">siamhasan@email.com</p>
+        </div>
+
+        <div class="profile-bio">
+            <h2>Bio</h2>
+            <p id="bio-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut volutpat leo at libero feugiat tincidunt. Vivamus eget ullamcorper dui. Morbi lobortis dolor ut ante pretium tincidunt.</p>
+        </div>
+
+        <div class="profile-details">
+            <h2>Contact Information</h2>
+            <ul>
+                <li><strong>Phone:</strong> <span id="user-phone">+1 234 567 890</span></li>
+                <li><strong>Location:</strong> <span id="user-location">Dhaka, Bangladesh</span></li>
+                <li><strong>Website:</strong> <a href="https://www.siamhasan.com" target="_blank" id="user-website">siamhasan.com</a></li>
+            </ul>
+        </div>
+
+        <button class="edit-profile-btn" onclick="editProfile()">Edit Profile</button>
+
+        <!-- Editable profile form -->
+        <div class="profile-form">
+            <h2>Edit Profile</h2>
+            <form id="edit-form" onsubmit="saveProfile(event)">
+                <label for="edit-name">Name</label>
+                <input type="text" id="edit-name" value="Siam Hasan" required>
+
+                <label for="edit-email">Email</label>
+                <input type="email" id="edit-email" value="siamhasan@email.com" required>
+
+                <label for="edit-bio">Bio</label>
+                <textarea id="edit-bio" required>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut volutpat leo at libero feugiat tincidunt. Vivamus eget ullamcorper dui.</textarea>
+
+                <label for="edit-phone">Phone</label>
+                <input type="tel" id="edit-phone" value="+1 234 567 890" required>
+
+                <label for="edit-location">Location</label>
+                <input type="text" id="edit-location" value="Dhaka, Bangladesh" required>
+
+                <label for="edit-website">Website</label>
+                <input type="url" id="edit-website" value="https://www.siamhasan.com" required>
+
+                <button type="submit" class="save-profile-btn">Save Profile</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Toggle between profile view and edit form
+        function editProfile() {
+            document.querySelector('.profile-header').style.display = 'none';
+            document.querySelector('.profile-bio').style.display = 'none';
+            document.querySelector('.profile-details').style.display = 'none';
+            document.querySelector('.edit-profile-btn').style.display = 'none';
+            document.querySelector('.profile-form').style.display = 'block';
+        }
+
+        // Save edited profile data
+        function saveProfile(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('edit-name').value;
+            const email = document.getElementById('edit-email').value;
+            const bio = document.getElementById('edit-bio').value;
+            const phone = document.getElementById('edit-phone').value;
+            const location = document.getElementById('edit-location').value;
+            const website = document.getElementById('edit-website').value;
+
+            // Update profile data in the profile view
+            document.getElementById('user-name').textContent = name;
+            document.getElementById('user-email').textContent = email;
+            document.getElementById('bio-text').textContent = bio;
+            document.getElementById('user-phone').textContent = phone;
+            document.getElementById('user-location').textContent = location;
+            document.getElementById('user-website').textContent = website;
+            document.getElementById('user-website').href = website;
+
+            // Hide the edit form and show the updated profile view
+            document.querySelector('.profile-header').style.display = 'block';
+            document.querySelector('.profile-bio').style.display = 'block';
+            document.querySelector('.profile-details').style.display = 'block';
+            document.querySelector('.edit-profile-btn').style.display = 'block';
+            document.querySelector('.profile-form').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
